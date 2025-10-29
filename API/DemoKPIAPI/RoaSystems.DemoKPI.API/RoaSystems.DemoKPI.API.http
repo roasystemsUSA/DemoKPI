@@ -1,0 +1,6 @@
+@RoaSystems.DemoKPI.API_HostAddress = http://localhost:5037
+
+GET {{RoaSystems.DemoKPI.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
