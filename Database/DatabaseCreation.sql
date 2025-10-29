@@ -1,0 +1,124 @@
+CREATE TABLE PoliticalParties(
+			Id int NOT NULL AUTO_INCREMENT,
+			Name varchar(512) NOT NULL,
+			Description Text NULL,
+			Orientation VARCHAR(30),
+			Url nvarchar(512) NOT NULL,
+            Logo nvarchar(512) NOT NULL,
+			CREATED_BY nvarchar(256) NOT NULL,
+			CREATION_DATE TIMESTAMP NOT NULL DEFAULT NOW(),
+			LAST_UPDATED_BY nvarchar(256) NULL,
+			LAST_UPDATE_DATE TIMESTAMP NULL,
+			DELETED TINYINT(1) NOT NULL DEFAULT 0,
+			DELETED_BY nvarchar(256) NULL,
+			DELETED_DATE TIMESTAMP NULL,
+			CONSTRAINT PK_PoliticalParties PRIMARY KEY (`Id`)
+); 
+
+CREATE TABLE Positions(
+			Id int NOT NULL AUTO_INCREMENT,
+			Name varchar(512) NOT NULL,
+			Description Text NULL,
+			Scope VARCHAR(30),
+			CREATED_BY nvarchar(256) NOT NULL,
+			CREATION_DATE TIMESTAMP NOT NULL DEFAULT NOW(),
+			LAST_UPDATED_BY nvarchar(256) NULL,
+			LAST_UPDATE_DATE TIMESTAMP NULL,
+			DELETED TINYINT(1) NOT NULL DEFAULT 0,
+			DELETED_BY nvarchar(256) NULL,
+			DELETED_DATE TIMESTAMP NULL,
+			CONSTRAINT PK_Positions PRIMARY KEY (`Id`)
+); 
+
+CREATE TABLE Politicians(
+			Id int NOT NULL AUTO_INCREMENT,
+			FirstName varchar(128) NOT NULL,
+			LastName varchar(128) NOT NULL,
+			DateOfBirth DATE,
+			PlaceOfBirth VARCHAR(256),
+			CREATED_BY nvarchar(256) NOT NULL,
+			CREATION_DATE TIMESTAMP NOT NULL DEFAULT NOW(),
+			LAST_UPDATED_BY nvarchar(256) NULL,
+			LAST_UPDATE_DATE TIMESTAMP NULL,
+			DELETED TINYINT(1) NOT NULL DEFAULT 0,
+			DELETED_BY nvarchar(256) NULL,
+			DELETED_DATE TIMESTAMP NULL,
+			CONSTRAINT PK_Politicians PRIMARY KEY (`Id`)
+); 
+
+CREATE TABLE PoliticalAffiliations(
+			Id INT NOT NULL AUTO_INCREMENT,
+			PoliticianId INT NOT NULL,
+			PoliticalPartyId INT,
+			FROM DATETIME,
+			TO DATETIME,
+			SeparationReasonOfficial TEXT,
+			SeparationReasonReal TEXT,
+			CREATED_BY nvarchar(256) NOT NULL,
+			CREATION_DATE TIMESTAMP NOT NULL DEFAULT NOW(),
+			LAST_UPDATED_BY nvarchar(256) NULL,
+			LAST_UPDATE_DATE TIMESTAMP NULL,
+			DELETED TINYINT(1) NOT NULL DEFAULT 0,
+			DELETED_BY nvarchar(256) NULL,
+			DELETED_DATE TIMESTAMP NULL,
+			CONSTRAINT PK_PoliticalAffiliations PRIMARY KEY (`Id`)
+); 
+
+
+ALTER TABLE PoliticalAffiliations ADD   CONSTRAINT `FK_PoliticianId_PoliticalAffiliations` FOREIGN KEY (`PoliticianId`) REFERENCES `Politicians` (`Id`);
+ALTER TABLE PoliticalAffiliations ADD   CONSTRAINT `FK_PoliticalPartyId_PoliticalAffiliations` FOREIGN KEY (`PoliticalPartyId`) REFERENCES `PoliticalParties` (`Id`);
+
+CREATE TABLE PositionsOccupied(
+			Id INT NOT NULL AUTO_INCREMENT,
+			PositionId INT NOT NULL,
+			PoliticianId INT NOT NULL,
+			FROM DATETIME,
+			TO DATETIME,
+			SeparationReasonOfficial TEXT,
+			SeparationReasonReal TEXT,
+			CREATED_BY nvarchar(256) NOT NULL,
+			CREATION_DATE TIMESTAMP NOT NULL DEFAULT NOW(),
+			LAST_UPDATED_BY nvarchar(256) NULL,
+			LAST_UPDATE_DATE TIMESTAMP NULL,
+			DELETED TINYINT(1) NOT NULL DEFAULT 0,
+			DELETED_BY nvarchar(256) NULL,
+			DELETED_DATE TIMESTAMP NULL,
+			CONSTRAINT PK_PositionsOccupied PRIMARY KEY (`Id`)
+); 
+
+ALTER TABLE PositionsOccupied ADD   CONSTRAINT `FK_PositionId_PositionsOccupied` FOREIGN KEY (`PositionId`) REFERENCES `Positions` (`Id`);
+ALTER TABLE PositionsOccupied ADD   CONSTRAINT `FK_PoliticianId_PositionsOccupied` FOREIGN KEY (`PoliticianId`) REFERENCES `Politicians` (`Id`);
+
+CREATE TABLE Issues(
+			Id INT NOT NULL AUTO_INCREMENT,
+			PositionOccupedId INT NOT NULL,
+			IssueDesc TEXT,
+			Status VARCHAR(128) NOT NULL, -- Indicates if the issue was probed, or is in dispute. 
+			IssueSourceURL VARCHAR(1024), 
+			CREATED_BY nvarchar(256) NOT NULL,
+			CREATION_DATE TIMESTAMP NOT NULL DEFAULT NOW(),
+			LAST_UPDATED_BY nvarchar(256) NULL,
+			LAST_UPDATE_DATE TIMESTAMP NULL,
+			DELETED TINYINT(1) NOT NULL DEFAULT 0,
+			DELETED_BY nvarchar(256) NULL,
+			DELETED_DATE TIMESTAMP NULL,
+			CONSTRAINT PK_Issues PRIMARY KEY (`Id`)
+); 
+
+ALTER TABLE Issues ADD   CONSTRAINT `FK_PositionOccupedId_Issues` FOREIGN KEY (`PositionOccupedId`) REFERENCES `PositionsOccupied` (`Id`);
+
+CREATE TABLE Flags(
+			Id INT NOT NULL AUTO_INCREMENT,
+			IssueId INT NOT NULL,
+			FlagType VARCHAR(1024) NOT NULL,
+			CREATED_BY nvarchar(256) NOT NULL,
+			CREATION_DATE TIMESTAMP NOT NULL DEFAULT NOW(),
+			LAST_UPDATED_BY nvarchar(256) NULL,
+			LAST_UPDATE_DATE TIMESTAMP NULL,
+			DELETED TINYINT(1) NOT NULL DEFAULT 0,
+			DELETED_BY nvarchar(256) NULL,
+			DELETED_DATE TIMESTAMP NULL,
+			CONSTRAINT PK_Issues PRIMARY KEY (`Id`)
+); 
+
+ALTER TABLE Flags ADD   CONSTRAINT `FK_IssueId_Flags` FOREIGN KEY (`IssueId`) REFERENCES `Issues` (`Id`);
