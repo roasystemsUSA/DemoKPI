@@ -1,4 +1,4 @@
-﻿namespace RoaSystems.DemoKPI.Service
+﻿  namespace RoaSystems.DemoKPI.Service
 {
     public class Class1
     {

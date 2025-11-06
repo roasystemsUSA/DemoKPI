@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\RoaSystems.DemoKPI.Model\RoaSystems.DemoKPI.Model.csproj" />
+    <ProjectReference Include="..\RoaSystems.DemoKPI.Repository\RoaSystems.DemoKPI.Repository.csproj" />
+  </ItemGroup>
+
 </Project>
