@@ -2,7 +2,7 @@
 
 namespace RoaSystems.DemoKPI.Model.Model.DTO
 {
-	public partial class PoliticalAffiliationRequestDTO : BaseEntity
+	public partial class PoliticalPartyRequestDTO : BaseEntity
 	{
 		public string Name { get; set; }
 		public string Description { get; set; }
@@ -10,7 +10,7 @@ namespace RoaSystems.DemoKPI.Model.Model.DTO
 		public string Url { get; set; }
 		public string Logo { get; set; } = string.Empty;
 
-		public static PoliticalAffiliationRequestDTO ToDTO(PoliticalParty politicalParty)
+		public static PoliticalPartyRequestDTO ToDTO(PoliticalParty politicalParty)
 		{
 			return new PoliticalPartyRequestDTO
 			{
