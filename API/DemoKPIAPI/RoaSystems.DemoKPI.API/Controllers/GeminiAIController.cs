@@ -2,6 +2,7 @@
 using RoaSystems.DemoKPI.Model.Model.DTO;
 using RoaSystems.DemoKPI.Service.Interfaces;
 
+
 namespace RoaSystems.DemoKPI.API.Controllers
 {
     [Route("api/[controller]")]
@@ -35,6 +36,29 @@ namespace RoaSystems.DemoKPI.API.Controllers
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }
+
+        ///// <summary>
+        ///// Sends a prompt to Gemini AI and returns the generated response.
+        ///// </summary>
+        //[HttpPost("pregunta")]
+        //public async Task<ActionResult<ChatResponseDTO>> Create_Prompt([FromBody] ChatRequestDTO request)
+        //{
+        //    if (string.IsNullOrWhiteSpace(request.Prompt))
+        //        return BadRequest("Prompt cannot be empty.");
+
+        //    try
+        //    {
+        //        // The service handles both the AI call and the persistence logic
+        //        var response = await _iAIService.GenerateResponseAsync(request);
+        //        return Ok(response);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        // Log the exception (using ILogger would be ideal here)
+        //        return StatusCode(500, $"Internal server error: {ex.Message}");
+        //    }
+        //}
+
         /*
 
         // GET: api/<GeminiAIController>
