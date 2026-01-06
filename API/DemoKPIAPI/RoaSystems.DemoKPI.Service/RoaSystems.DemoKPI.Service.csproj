@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Google.GenAI" Version="0.9.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\RoaSystems.DemoKPI.Model\RoaSystems.DemoKPI.Model.csproj" />
     <ProjectReference Include="..\RoaSystems.DemoKPI.Repository\RoaSystems.DemoKPI.Repository.csproj" />
   </ItemGroup>

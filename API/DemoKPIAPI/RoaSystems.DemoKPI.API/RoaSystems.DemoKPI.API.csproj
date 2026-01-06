@@ -10,4 +10,9 @@
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.10" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\RoaSystems.DemoKPI.Model\RoaSystems.DemoKPI.Model.csproj" />
+    <ProjectReference Include="..\RoaSystems.DemoKPI.Service\RoaSystems.DemoKPI.Service.csproj" />
+  </ItemGroup>
+
 </Project>
